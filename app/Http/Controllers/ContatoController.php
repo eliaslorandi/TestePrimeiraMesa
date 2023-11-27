@@ -8,15 +8,16 @@ use Illuminate\Http\Request;
 class ContatoController extends Controller
 {
     public readonly Contato $contato;
-    public function __construct(Contato $contato)
+
+    public function __construct()
     {
         $this->contato = new Contato();
     }
 
     public function index()
     {
-        $contatos = Contato::all();
-        return view('contatos.index', compact('contatos'));
+        $contatos = $this->contato->all();
+        return view('contatos', ['contatos' => $contatos]);
     }
 
     public function create()
