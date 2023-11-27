@@ -6,7 +6,7 @@
 
 <ul>
     @foreach ($contatos as $contato)
-        <li>{{ $contato->nome }}</li>
+        <li>{{ $contato->nome }} | <a href="">Editar</a> | <a href="">Deletar</a> </li>
     @endforeach
 </ul>
 
