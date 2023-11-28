@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('contatos', function (Blueprint $table) {
         $table->id();
         $table->string('nome');
-        $table->string('numero_celular');
+        $table->integer('numero_celular');
         $table->string('email')->nullable();
         $table->text('nota')->nullable();
         $table->timestamps();

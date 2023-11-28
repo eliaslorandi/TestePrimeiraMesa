@@ -8,7 +8,7 @@
 
 <hr>
 
-<a href="{{ route('contatos.index') }}"> Todos os Contato </a>
+<a href="{{ route('contatos.index') }}"> Lista de Contatos </a>
 
 <hr>
 
