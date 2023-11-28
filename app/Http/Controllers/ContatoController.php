@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class ContatoController extends Controller
 {
     public readonly Contato $contato;
-    public readonly Endereco $endereco;
 
     public function __construct()
     {

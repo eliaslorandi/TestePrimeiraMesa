@@ -8,7 +8,7 @@
 
 <hr>
 
-<h2>Agenda Telefônica</h2>
+<h2>Lista de Contatos</h2>
 
 <ul>
     @foreach ($contatos as $contato)
