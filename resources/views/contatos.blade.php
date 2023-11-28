@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('content')
 
@@ -6,7 +6,7 @@
 
 <hr>
 
-<h2>Contatos</h2>
+<h2>Agenda Telefônica</h2>
 
 <ul>
     @foreach ($contatos as $contato)
