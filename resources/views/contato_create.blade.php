@@ -1,7 +1,9 @@
 @extends('layouts.master')
 
+@section('title', 'Criar Contato')
+
 @section('content')
-    <h2>Create</h2>
+    <h2>Criar Contato</h2>
 
     @if (session()->has('message'))
         {{ session()->get('message') }}

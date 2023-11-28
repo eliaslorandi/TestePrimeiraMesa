@@ -1,8 +1,10 @@
 @extends('layouts.master')
 
+@section('title', 'Agenda Telefônica')
+
 @section('content')
 
-<a href="{{ route('contatos.create') }}">Novo</a>
+<a href="{{ route('contatos.create') }}"> Novo Contato </a>
 
 <hr>
 
