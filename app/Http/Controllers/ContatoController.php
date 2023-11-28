@@ -54,6 +54,6 @@ class ContatoController extends Controller
     public function destroy(Contato $contato)
     {
         $contato->delete();
-        return redirect()->route('contatos.index')->with('message', 'success', 'Contato removido com sucesso!');
+        return redirect()->route('contatos')->with('message', 'success', 'Contato removido com sucesso!');
     }
 }
