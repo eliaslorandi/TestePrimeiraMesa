@@ -12,6 +12,6 @@ class Endereco extends Model
     // Define o inverso do relacionamento um-para-muitos com o modelo Contato
     public function contato()
     {
-        return $this->belongsTo(Contato::class);
+        return $this->belongsTo('App\Models\Contato');
     }
 }

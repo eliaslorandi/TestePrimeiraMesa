@@ -12,6 +12,6 @@ class Contato extends Model
     // Define um relacionamento um-para-muitos com o modelo Endereco
     public function enderecos()
     {
-        return $this->hasMany(Endereco::class);
+        return $this->hasMany('App\Models\Endereco');
     }
 }

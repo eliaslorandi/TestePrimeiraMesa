@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contato;
+use App\Models\Endereco;
 use Illuminate\Http\Request;
 
 class ContatoController extends Controller
 {
     public readonly Contato $contato;
+    public readonly Endereco $endereco;
 
     public function __construct()
     {
@@ -20,36 +22,39 @@ class ContatoController extends Controller
         return view('contatos', ['contatos' => $contatos]);
     }
 
-    public function create()
-    {
-        return view('contatos.create');
-    }
-
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $contato = Contato::create($request->all());
-        return redirect()->route('contatos.index')->with('success', 'Contato criado com sucesso!');
+        return redirect()->route('contatos.index')->with(['message' => 'Contato criado com sucesso!', 'alert' => 'success']);
     }
 
-    public function show(Contato $contato)
+    public function store()
     {
-        return view('contatos.show', compact('contato'));
+    }
+
+    public function show()
+    {
     }
 
     public function edit(Contato $contato)
     {
-        return view('contatos.edit', compact('contato'));
+        return view('contato_edit', ['contato' => $contato]);
     }
 
-    public function update(Request $request, Contato $contato)
+    public function update(Request $request, $id)
     {
-        $contato->update($request->all());
-        return redirect()->route('contatos.index')->with('success', 'Contato atualizado com sucesso!');
+        //atualização dos dados do contato
+        $updated = $this->contato->where('id', $id)->update($request->except(['_token', '_method']));
+        if ($updated) {
+            return redirect()->back()->with(['message', 'success', 'Contato atualizado com sucesso!', 'alert' => 'success']);
+        }
+        return redirect()->back()->with(['message', 'error', 'Erro ao atualizar contato!', 'alert' => 'danger']);
+
     }
 
     public function destroy(Contato $contato)
     {
         $contato->delete();
-        return redirect()->route('contatos.index')->with('success', 'Contato removido com sucesso!');
+        return redirect()->route('contatos.index')->with('message', 'success', 'Contato removido com sucesso!');
     }
 }
