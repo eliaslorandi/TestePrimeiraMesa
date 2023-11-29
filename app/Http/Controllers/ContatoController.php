@@ -29,28 +29,29 @@ class ContatoController extends Controller
     }
 
     public function store(Request $request) //traz todos os dados do formulário
-{
-    $created = $this->contato->create([
-        'nome' => $request->input('nome'),
-        'numero_celular' => $request->input('numero_celular'),
-        'email' => $request->input('email'),
-        'nota' => $request->input('nota'),
-        'CEP' => $request->input('cep'),
-        'Rua' => $request->input('rua'),
-        'Número' => $request->input('numero'),
-        'Complemento' => $request->input('complemento'),
-        'Bairro' => $request->input('bairro'),
-        'Cidade' => $request->input('cidade'),
-        'Estado' => $request->input('estado'),
-    ]);
+    {
+        $contato = $this->contato->create([
+            'nome' => $request->input('nome'),
+            'numero_celular' => $request->input('numero_celular'),
+            'email' => $request->input('email'),
+            'nota' => $request->input('nota'),
+            'CEP' => $request->input('cep'),
+            'Rua' => $request->input('rua'),
+            'Número' => $request->input('numero'),
+            'Complemento' => $request->input('complemento'),
+            'Bairro' => $request->input('bairro'),
+            'Cidade' => $request->input('cidade'),
+            'Estado' => $request->input('estado'),
+        ]);
+        $contato->save();
 
-    // verifica se o contato foi criado com sucesso antes de usá-lo
-    if ($created) {
-        return redirect()->route('contatos.index', ['contato' => $created->id])->with(['message' => 'success', 'alert' => 'success', 'Contato criado com sucesso!']);
-    } else {
-        return redirect()->route('contatos.index')->with(['message' => 'error', 'alert' => 'danger', 'Erro ao criar contato!']);
+        // verifica se o contato foi criado com sucesso antes de usá-lo
+        if ($contato) {
+            return redirect()->route('contatos.index', ['contato' => $contato->id])->with(['message' => 'success', 'alert' => 'success', 'Contato criado com sucesso!']);
+        } else {
+            return redirect()->route('contatos.index')->with(['message' => 'error', 'alert' => 'danger', 'Erro ao criar contato!']);
+        }
     }
-}
 
     public function show(Contato $contato)
     {
@@ -66,8 +67,8 @@ class ContatoController extends Controller
     public function update(Request $request, $id)
     {
         //atualização dos dados do contato
-        $updated = $this->contato->where('id', $id)->update($request->except(['_token', '_method']));
-        if ($updated) {
+        $contato = $this->contato->where('id', $id)->update($request->except(['_token', '_method']));
+        if ($contato) {
             return redirect()->route('contatos.index')->with(['message', 'success', 'Contato atualizado com sucesso!', 'alert' => 'success']);
         }
         return redirect()->back()->with(['message', 'error', 'Erro ao atualizar contato!', 'alert' => 'danger']);
