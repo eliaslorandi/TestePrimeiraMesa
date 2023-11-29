@@ -7,9 +7,9 @@
 
     <a href="{{ route('contatos.create') }}"> Novo Contato </a>
 
-    <div class="collapse navbar-collapse" id="navbar">
+    {{-- <div class="collapse navbar-collapse" id="navbar">
     <a href="{{ route('contatos.create') }}" class="navbar-brand"> Novo Contato </a>
-    </div>
+    </div> --}}
 
     <div id="search-container" class="">
         <h1>Busca</h1>

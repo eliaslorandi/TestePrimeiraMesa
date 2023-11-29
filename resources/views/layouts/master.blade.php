@@ -24,9 +24,14 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbar">
                 <a href="{{ route('home') }}" class="navbar-brand"> Início </a>
+                @auth
+                <a href="/dashboard" class="navbar-brand"> Dashboard </a>
                 <a href="{{ route('contatos.index') }}" class="navbar-brand"> Lista de Contatos </a>
-                <a href="{{ route('home') }}" class="navbar-brand"> Entrar </a>
-                <a href="{{ route('home') }}" class="navbar-brand"> Cadastrar </a>
+                @endauth
+                @guest
+                <a href="/login" class="navbar-brand"> Entrar </a>
+                <a href="/register" class="navbar-brand"> Cadastrar </a>
+                @endguest
             </div>
         </nav>
     </header>

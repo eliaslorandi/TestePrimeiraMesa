@@ -4,8 +4,6 @@
 
 @section('content')
 
-<hr>
-
 <h2>Agenda Telefônica</h2>
 
 
