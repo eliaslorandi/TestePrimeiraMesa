@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('enderecos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('contato_id');
+            $table->string('cep')->nullable();
+            $table->string('rua')->nullable();
+            $table->integer('numero')->nullable();
+            $table->string('complemento')->nullable();
+            $table->string('bairro')->nullable();
+            $table->string('cidade')->nullable();
+            $table->string('estado')->nullable();
             $table->timestamps();
+    
+            $table->foreign('contato_id')->references('id')->on('contatos')->onDelete('cascade');
         });
     }
 
