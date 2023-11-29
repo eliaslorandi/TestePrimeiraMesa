@@ -9,24 +9,24 @@
         {{ session()->get('message') }}
     @endif
 
-    <div>
+    <div id="form-novo-contato">
         <form action="{{ route('contatos.store') }}" method="POST">
             <div class="form-novo-contato">
                 @csrf
-                <input type="text" id="nome" name="nome" placeholder="nome">
+                <input type="text" id="nome" name="nome" placeholder="Nome Completo">
                 <input type="text" name="numero_celular" placeholder="Celular">
-                <input type="text" name="email" placeholder="email">
-                <!--<input type="text" name="cep">
-                        <input type="text" name="rua">
-                        <input type="text" name="numero">
-                        <input type="text" name="complemento">
-                        <input type="text" name="bairro">
-                        <input type="text" name="cidade">
-                        <input type="text" name="estado">--> 
-                <input type="text" name="nota">
+                <input type="text" name="email" placeholder="Email">
+                <input type="text" name="cep" placeholder="CEP">
+                <input type="text" name="rua" placeholder="Rua">
+                <input type="text" name="numero" placeholder="Número">
+                <input type="text" name="complemento" placeholder="Complemento">
+                <input type="text" name="bairro" placeholder="Bairro">
+                <input type="text" name="cidade" placeholder="Cidade">
+                <input type="text" name="estado" placeholder="Estado">
+                <input type="text" name="nota" placeholder="Nota">
             </div>
             <button type="submit"> Cadastrar </button>
         </form>
     </div>
 
-@endsection 
+@endsection

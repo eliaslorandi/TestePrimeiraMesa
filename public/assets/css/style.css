@@ -4,11 +4,10 @@ body {
     font-family: 'Open Sans', sans-serif;
     background-color: rgba(182, 182, 182, 0.478);
 }
-
 header {
     background-color: #fff;
-    border-bottom: 1px solid #ccc;
-    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 Lista-contatos {
@@ -17,19 +16,14 @@ Lista-contatos {
     margin-bottom: 10px;
 }
 
-ul {
+ul{
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
 /* navbar */
-#navbar {
-    justify-content: space-between;
-    background-color: fff;
-    padding: 5px 0;
+#navbar a:hover{
+    color: rgb(197, 115, 8);
 }
 
-#navbar a:hover{
-    color: #ff7300d5;
-}

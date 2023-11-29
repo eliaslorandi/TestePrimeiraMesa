@@ -4,9 +4,8 @@
 
 @section('content')
 
-    {{-- <a href="{{ route('home') }}"> Início </a>
-    <br>
-    <a href="{{ route('contatos.create') }}"> Novo Contato </a> --}}
+
+    <a href="{{ route('contatos.create') }}"> Novo Contato </a>
 
     <div class="collapse navbar-collapse" id="navbar">
     <a href="{{ route('contatos.create') }}" class="navbar-brand"> Novo Contato </a>

@@ -28,13 +28,20 @@ class ContatoController extends Controller
         // return redirect()->route('contatos.index')->with(['message' => 'Contato criado com sucesso!', 'alert' => 'success']);
     }
 
-    public function store(Request $request)
+    public function store(Request $request) //traz todos os dados do formulário
 {
     $created = $this->contato->create([
         'nome' => $request->input('nome'),
         'numero_celular' => $request->input('numero_celular'),
         'email' => $request->input('email'),
         'nota' => $request->input('nota'),
+        'CEP' => $request->input('cep'),
+        'Rua' => $request->input('rua'),
+        'Número' => $request->input('numero'),
+        'Complemento' => $request->input('complemento'),
+        'Bairro' => $request->input('bairro'),
+        'Cidade' => $request->input('cidade'),
+        'Estado' => $request->input('estado'),
     ]);
 
     // verifica se o contato foi criado com sucesso antes de usá-lo

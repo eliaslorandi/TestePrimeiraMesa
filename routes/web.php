@@ -18,7 +18,7 @@ use App\Http\Controllers\ContatoController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contatos', [ContatoController::class, 'index'])->name('contatos.index');
 Route::get('/contatos/create', [ContatoController::class, 'create'])->name('contatos.create');
-Route::post('/contatos', [ContatoController::class, 'store'])->name('contatos.store');
+Route::post('/contatos', [ContatoController::class, 'store'])->name('contatos.store'); //metodo de adição
 Route::get('/contatos/{contato}', [ContatoController::class, 'show'])->name('contatos.show');
 Route::get('/contatos/{contato}/edit', [ContatoController::class, 'edit'])->name('contatos.edit');
 Route::put('/contatos/{contato}', [ContatoController::class, 'update'])->name('contatos.update');
