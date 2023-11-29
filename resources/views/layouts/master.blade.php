@@ -24,14 +24,20 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbar">
                 <a href="{{ route('home') }}" class="navbar-brand"> Início </a>
-                @auth
-                <a href="/dashboard" class="navbar-brand"> Dashboard </a>
-                <a href="{{ route('contatos.index') }}" class="navbar-brand"> Lista de Contatos </a>
-                @endauth
                 @guest
-                <a href="/login" class="navbar-brand"> Entrar </a>
-                <a href="/register" class="navbar-brand"> Cadastrar </a>
+                    <a href="/login" class="navbar-brand"> Entrar </a>
+                    <a href="/register" class="navbar-brand"> Cadastrar </a>
                 @endguest
+                @auth
+                    <a href="/dashboard" class="navbar-brand"> Dashboard </a>
+                    <a href="{{ route('contatos.index') }}" class="navbar-brand"> Lista de Contatos </a>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <a href="/logout" class="navbar-brand"
+                            onclick="event.preventDefault();
+                    this.closest('form').submit();"> Sair </a>
+                    </form>
+                @endauth
             </div>
         </nav>
     </header>
