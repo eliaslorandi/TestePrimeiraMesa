@@ -10,9 +10,9 @@
     @endif
 
     <div>
-        <form action="/contatos" method="POST">
+        <form action="{{ route('contatos.store') }}" method="POST">
             <div class="form-novo-contato">
-                <input type="hidden" name="_method" method="GET">
+                @csrf
                 <input type="text" id="nome" name="nome" placeholder="nome">
                 <input type="text" name="numero_celular" placeholder="Celular">
                 <input type="text" name="email" placeholder="email">
@@ -22,11 +22,11 @@
                         <input type="text" name="complemento">
                         <input type="text" name="bairro">
                         <input type="text" name="cidade">
-                        <input type="text" name="estado">-->
+                        <input type="text" name="estado">--> 
                 <input type="text" name="nota">
             </div>
             <button type="submit"> Cadastrar </button>
         </form>
     </div>
 
-@endsection
+@endsection 

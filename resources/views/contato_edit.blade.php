@@ -21,8 +21,8 @@
         <input type="text" name="complemento" value="{{ $contato->complemento }}">
         <input type="text" name="bairro" value="{{ $contato->bairro }}">
         <input type="text" name="cidade" value="{{ $contato->cidade }}">
-        <input type="text" name="estado" value="{{ $contato->estado }}">
-        <input type="text" name="nota" value="{{ $contato->nota }}">-->
+        <input type="text" name="estado" value="{{ $contato->estado }}">-->
+        <input type="text" name="nota" value="{{ $contato->nota }}">
         <button type="submit"> Alterar </button>
     </form>
 @endsection
