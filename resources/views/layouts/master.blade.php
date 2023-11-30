@@ -44,11 +44,10 @@
     <div class="container">
         @yield('content')
     </div>
+
     <footer>
-
         <p>Teste Agenda Telefônica</p>
-        </p>
-
+    </footer>
 </body>
 
 </html>
