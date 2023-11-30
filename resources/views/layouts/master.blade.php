@@ -7,10 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- Fonte -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- CSS Personalizado -->
+    <!-- CSS Bootstrap -->
+    <link href="integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 </head>
@@ -18,51 +22,33 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbar">
                 <a href="{{ route('home') }}" class="navbar-brand"> Início </a>
                 @guest
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="/login" class="nav-link"> Entrar </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/register" class="nav-link"> Cadastrar </a>
-                        </li>
-                    </ul>
+                    <a href="/login" class="navbar-brand"> Entrar </a>
+                    <a href="/register" class="navbar-brand"> Cadastrar </a>
                 @endguest
                 @auth
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="/dashboard" class="nav-link"> Dashboard </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('contatos.index') }}" class="nav-link"> Lista de Contatos </a>
-                        </li>
-                        <li class="nav-item">
-                            <form action="/logout" method="POST" class="nav-link">
-                                @csrf
-                                <a href="/logout" onclick="event.preventDefault(); this.closest('form').submit();"> Sair </a>
-                            </form>
-                        </li>
-                    </ul>
+                    <a href="/dashboard" class="navbar-brand"> Dashboard </a>
+                    <a href="{{ route('contatos.index') }}" class="navbar-brand"> Lista de Contatos </a>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <a href="/logout" class="navbar-brand"
+                            onclick="event.preventDefault();
+                    this.closest('form').submit();"> Sair </a>
+                    </form>
                 @endauth
             </div>
         </nav>
     </header>
-
-    <div class="container mt-4">
+    <div class="container">
         @yield('content')
     </div>
+    <footer>
 
-    <footer class="mt-5">
-        <div class="container text-center">
-            <p>Teste Agenda Telefônica</p>
-        </div>
-    </footer>
+        <p>Teste Agenda Telefônica</p>
+        </p>
 
-    <!-- Bootstrap JS (opcional, caso você precise de funcionalidades específicas do Bootstrap) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
-

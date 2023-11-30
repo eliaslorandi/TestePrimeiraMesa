@@ -4,32 +4,34 @@
 
 @section('content')
 
-    <h2>Contato - {{ $contato->nome }} </h2>
+    <div class="contact-details">
+        <h2>Detalhes do Contato - {{ $contato->nome }} </h2>
+        <hr>
 
-    <hr>
-    @if(isset($endereco))
-        
-    <p>Nome: {{ $contato->nome }}</p>
-    <p>Número Celular: {{ $contato->numero_celular }}</p>
-    <p>Email: {{ $contato->email }}</p>
-    <p>CEP: {{ $endereco->cep }}</p>
-    <p>Rua: {{ $endereco->rua }}</p>
-    <p>Número: {{ $endereco->numero }}</p>
-    <p>Complemento: {{ $endereco->complemento }}</p>
-    <p>Bairro: {{ $endereco->bairro }}</p>
-    <p>Cidade: {{ $endereco->cidade }}</p>
-    <p>Estado: {{ $endereco->estado }}</p>
-@else
-    <p>Este contato não possui um endereço cadastrado.</p>
-@endif
+        @if(isset($endereco))
+            <div class="contact-info">
+                <p><strong>Nome:</strong> {{ $contato->nome }}</p>
+                <p><strong>Número Celular:</strong> {{ $contato->numero_celular }}</p>
+                <p><strong>Email:</strong> {{ $contato->email }}</p>
+                <p><strong>CEP:</strong> {{ $endereco->cep }}</p>
+                <p><strong>Rua:</strong> {{ $endereco->rua }}</p>
+                <p><strong>Número:</strong> {{ $endereco->numero }}</p>
+                <p><strong>Complemento:</strong> {{ $endereco->complemento }}</p>
+                <p><strong>Bairro:</strong> {{ $endereco->bairro }}</p>
+                <p><strong>Cidade:</strong> {{ $endereco->cidade }}</p>
+                <p><strong>Estado:</strong> {{ $endereco->estado }}</p>
+            </div>
+        @else
+            <p>Este contato não possui um endereço cadastrado.</p>
+        @endif
 
-    <form action="{{ route('contatos.destroy', ['contato' => $contato->id]) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Excluir</button>
-    </form>
+        <form action="{{ route('contatos.destroy', ['contato' => $contato->id]) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Excluir Contato</button>
+        </form>
 
-    <hr>
+        <hr>
+    </div>
 
 @endsection
-
