@@ -5,19 +5,12 @@
 @section('content')
 
 
-    <a href="{{ route('contatos.create') }}"> Novo Contato </a>
+<a href="{{ route('contatos.create') }}"> Novo Contato </a>
+<h1> Lista de Contatos</h1>
 
     {{-- <div class="collapse navbar-collapse" id="navbar">
     <a href="{{ route('contatos.create') }}" class="navbar-brand"> Novo Contato </a>
     </div> --}}
-
-    <div id="search-container" class="">
-        <h1>Busca</h1>
-        <form action="">
-            <input type="text" id="search" name="search" class="form-control" placeholder="Procurar...">
-            <button type="submit">Filtrar</button>
-        </form>
-    </div>
 <br>
     <div>
         <ul>

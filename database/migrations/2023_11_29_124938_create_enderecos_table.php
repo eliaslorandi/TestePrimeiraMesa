@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('enderecos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('contato_id');
+            $table->foreignId('contato_id')->constrained();
             $table->string('cep')->nullable();
             $table->string('rua')->nullable();
             $table->integer('numero')->nullable();
@@ -22,8 +22,6 @@ return new class extends Migration
             $table->string('cidade')->nullable();
             $table->string('estado')->nullable();
             $table->timestamps();
-    
-            $table->foreign('contato_id')->references('id')->on('contatos')->onDelete('cascade');
         });
     }
 
@@ -32,6 +30,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enderecos');
+        Schema::table('enderecos', function (Blueprint $table) {
+            $table->foreignId('contato_id')->constrained()->onDelete('cascade');
+        });
     }
 };

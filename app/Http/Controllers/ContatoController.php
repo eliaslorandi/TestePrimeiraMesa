@@ -35,28 +35,36 @@ class ContatoController extends Controller
             'numero_celular' => $request->input('numero_celular'),
             'email' => $request->input('email'),
             'nota' => $request->input('nota'),
-            'CEP' => $request->input('cep'),
-            'Rua' => $request->input('rua'),
-            'Número' => $request->input('numero'),
-            'Complemento' => $request->input('complemento'),
-            'Bairro' => $request->input('bairro'),
-            'Cidade' => $request->input('cidade'),
-            'Estado' => $request->input('estado'),
         ]);
         $contato->save();
+        $endereco = Endereco::create([
+            'contato_id' => $contato->id,
+            'cep' => $request->input('cep'),
+            'rua' => $request->input('rua'),
+            'numero' => $request->input('numero'),
+            'complemento' => $request->input('complemento'),
+            'bairro' => $request->input('bairro'),
+            'cidade' => $request->input('cidade'),
+            'estado' => $request->input('estado'),
+        ]);
+
+        $endereco->save();
 
         // verifica se o contato foi criado com sucesso antes de usá-lo
         if ($contato) {
-            return redirect()->route('contatos.index', ['contato' => $contato->id])->with(['message' => 'success', 'alert' => 'success', 'Contato criado com sucesso!']);
+            return redirect()->route('contatos.index', ['contato' => $contato->id]);
         } else {
-            return redirect()->route('contatos.index')->with(['message' => 'error', 'alert' => 'danger', 'Erro ao criar contato!']);
+            return redirect()->route('contatos.index');
         }
     }
 
     public function show(Contato $contato)
-    {
-        return view('contato_show', ['contato' => $contato]);
-    }
+{
+    // Carrega o endereço associado ao contato
+    $endereco = Endereco::where('contato_id', $contato->id)->first();
+    return view('contato_show', ['contato' => $contato, 'endereco' => $endereco]);
+}
+
 
     public function edit(Contato $contato)
     {
@@ -68,15 +76,18 @@ class ContatoController extends Controller
     {
         //atualização dos dados do contato
         $contato = $this->contato->where('id', $id)->update($request->except(['_token', '_method']));
+        $contato->endereco->update($request->only(['cep', 'rua', 'numero', 'complemento', 'bairro', 'cidade', 'estado']));
+
+        return redirect()->route('contatos.index')->with('success', 'Contato atualizado com sucesso!');
         if ($contato) {
-            return redirect()->route('contatos.index')->with(['message', 'success', 'Contato atualizado com sucesso!', 'alert' => 'success']);
+            return redirect()->route('contatos.index');
         }
-        return redirect()->back()->with(['message', 'error', 'Erro ao atualizar contato!', 'alert' => 'danger']);
+        return redirect()->back();
     }
 
     public function destroy($id)
     {
         $this->contato->where('id', $id)->delete();
-        return redirect()->route('contatos.index')->with(['message', 'success', 'Contato excluído com sucesso!', 'alert' => 'success']);
+        return redirect()->route('contatos.index');
     }
 }
