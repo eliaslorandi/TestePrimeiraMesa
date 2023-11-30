@@ -29,8 +29,8 @@
                     <a href="/register" class="navbar-brand"> Cadastrar </a>
                 @endguest
                 @auth
-                    <a href="/dashboard" class="navbar-brand"> Dashboard </a>
                     <a href="{{ route('contatos.index') }}" class="navbar-brand"> Lista de Contatos </a>
+                    <a href="{{ route('contatos.create') }}" class="navbar-brand"> Novo Contato </a>
                     <form action="/logout" method="POST">
                         @csrf
                         <a href="/logout" class="navbar-brand"

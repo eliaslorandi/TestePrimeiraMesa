@@ -4,9 +4,12 @@
 
 @section('content')
 
-<h2>Agenda Telefônica</h2>
+    <h2>Agenda Telefônica</h2>
 
-<p>Faça Login para ter acesso a lista de contatos</p>
-
+    @guest
+        <p>Faça Login para ter acesso à lista de contatos</p>
+    @else
+        <p>Você está logado</p>
+    @endguest
 
 @endsection
