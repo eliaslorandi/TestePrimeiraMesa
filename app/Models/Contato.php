@@ -10,8 +10,8 @@ class Contato extends Model
     protected $fillable = ['nome', 'numero_celular', 'email', 'nota'];
 
     // Define um relacionamento um-para-muitos com o modelo Endereco
-    public function enderecos()
+    public function endereco()
     {
-        return $this->hasMany('App\Models\Endereco');
+        return $this->hasOne(Endereco::class);
     }
 }

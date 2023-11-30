@@ -7,7 +7,8 @@
     <h2>Contato - {{ $contato->nome }} </h2>
 
     <hr>
-
+    @if(isset($endereco))
+        
     <p>Nome: {{ $contato->nome }}</p>
     <p>Número Celular: {{ $contato->numero_celular }}</p>
     <p>Email: {{ $contato->email }}</p>
@@ -18,7 +19,9 @@
     <p>Bairro: {{ $endereco->bairro }}</p>
     <p>Cidade: {{ $endereco->cidade }}</p>
     <p>Estado: {{ $endereco->estado }}</p>
-    <p>Nota: {{ $contato->nota }}</p>
+@else
+    <p>Este contato não possui um endereço cadastrado.</p>
+@endif
 
     <form action="{{ route('contatos.destroy', ['contato' => $contato->id]) }}" method="POST">
         @csrf
@@ -29,3 +32,4 @@
     <hr>
 
 @endsection
+

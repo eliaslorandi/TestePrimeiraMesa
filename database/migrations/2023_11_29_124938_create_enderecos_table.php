@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('contato_id')->constrained();
             $table->string('cep')->nullable();
             $table->string('rua')->nullable();
-            $table->integer('numero')->nullable();
+            $table->string('numero')->nullable();
             $table->string('complemento')->nullable();
             $table->string('bairro')->nullable();
             $table->string('cidade')->nullable();
