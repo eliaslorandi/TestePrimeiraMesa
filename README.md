@@ -9,5 +9,5 @@ Nome: teste_agenda_telefonica
 Usuário: root
 Senha: 
 
-códigos no terminal para iniciar o servidor
+códigos no terminal para iniciar o servidor:
 php artisan serve   
