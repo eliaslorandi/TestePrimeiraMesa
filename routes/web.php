@@ -6,6 +6,7 @@ use App\Http\Controllers\ContatoController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/contatos/search', [ContatoController::class, 'searchByName'])->name('contatos.search');//antes de .index para realizar a busca
 Route::get('/contatos', [ContatoController::class, 'index'])->name('contatos.index');
 Route::get('/contatos/create', [ContatoController::class, 'create'])->name('contatos.create');
 Route::post('/contatos', [ContatoController::class, 'store'])->name('contatos.store'); //metodo de adição

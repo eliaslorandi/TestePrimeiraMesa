@@ -35,6 +35,7 @@
                     <br>
                     <!-- Endereço -->
                     <h3>Endereço</h3>
+                    <h6>Caso digite o CEP, adicione apenas os campos de número, complemento e nota (opcional)</h6>
                     <div class="mb-3">
                         <label for="cep" class="form-label">CEP</label>
                         <input type="text" name="cep" class="form-control" placeholder="12345-678" data-mask="00000-000">

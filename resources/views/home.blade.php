@@ -7,9 +7,9 @@
     <h2>Agenda Telefônica</h2>
 
     @guest
-        <p>Faça Login para ter acesso à lista de contatos</p>
+        <p>Faça Login para ter acesso à lista de contatos.</p>
     @else
-        <p>Você está logado</p>
+        <p>Você está logado!</p>
     @endguest
 
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contato;
 use App\Models\Endereco;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class ContatoController extends Controller
 {
@@ -28,12 +29,24 @@ class ContatoController extends Controller
 
     public function store(Request $request)
     {
-        // Validação dos dados recebidos
         $request->validate([
             'nome' => 'required',
             'numero_celular' => 'required',
-            // Adicione outras regras de validação conforme necessário
         ]);
+
+        // Inicializa variáveis do endereço
+        $enderecoViaCEP = null;
+
+        // Verifica se o CEP foi fornecido e é válido
+        if ($request->filled('cep') && is_numeric($request->cep)) {
+            // Chama a API ViaCEP para obter informações do endereço
+            $enderecoViaCEP = $this->getEnderecoViaCEP($request->input('cep'));
+
+            // Se a API ViaCEP retornar erro ou não encontrar o CEP, define $enderecoViaCEP como null
+            if (isset($enderecoViaCEP['erro']) || empty($enderecoViaCEP['cep'])) {
+                $enderecoViaCEP = null;
+            }
+        }
 
         // Criação do Contato
         $contato = $this->contato->create([
@@ -43,33 +56,37 @@ class ContatoController extends Controller
             'nota' => $request->input('nota'),
         ]);
 
-        // Criação do Endereco associado ao Contato
-        $endereco = Endereco::create([
-            'contato_id' => $contato->id,
-            'cep' => $request->input('cep'),
-            'rua' => $request->input('rua'),
-            'numero' => $request->input('numero'),
-            'complemento' => $request->input('complemento'),
-            'bairro' => $request->input('bairro'),
-            'cidade' => $request->input('cidade'),
-            'estado' => $request->input('estado'),
-        ]);
-
-        // Verificação se tanto o Contato quanto o Endereco foram criados com sucesso
-        if ($contato && $endereco) {
-            return redirect()->route('contatos.index', ['contato' => $contato->id])
-                ->with('success', 'Contato criado com sucesso!');
+        // Criação do Endereco associado ao Contato com os dados do ViaCEP
+        if ($enderecoViaCEP) {
+            Endereco::create([
+                'contato_id' => $contato->id,
+                'cep' => $enderecoViaCEP['cep'],
+                'rua' => $enderecoViaCEP['logradouro'] ?? '',
+                'numero' => $request->input('numero') ?? '',
+                'complemento' => $request->input('complemento') ?? '',
+                'bairro' => $enderecoViaCEP['bairro'] ?? '',
+                'cidade' => $enderecoViaCEP['localidade'] ?? '',
+                'estado' => $enderecoViaCEP['uf'] ?? '',
+            ]);
         } else {
-            // Trate o caso em que algo deu errado
-            return redirect()->route('contatos.index')
-                ->with('error', 'Ocorreu um erro ao criar o Contato. Tente novamente.');
+            // Se não houver informações do ViaCEP, salva os campos do endereço como string vazia
+            Endereco::create([
+                'contato_id' => $contato->id,
+                'cep' => $request->input('cep') ?? '',
+                'rua' => $request->input('rua') ?? '',
+                'numero' => $request->input('numero') ?? '',
+                'complemento' => $request->input('complemento') ?? '',
+                'bairro' => $request->input('bairro') ?? '',
+                'cidade' => $request->input('cidade') ?? '',
+                'estado' => $request->input('estado') ?? '',
+            ]);
         }
-    }
 
+        return redirect()->route('contatos.index', ['contato' => $contato->id]);
+    }
 
     public function show(Contato $contato)
     {
-        // Carrega o endereço associado ao contato
         $endereco = Endereco::where('contato_id', $contato->id)->first();
         return view('contato_show', ['contato' => $contato, 'endereco' => $endereco]);
     }
@@ -114,5 +131,26 @@ class ContatoController extends Controller
         $contato->delete();
 
         return redirect()->route('contatos.index');
+    }
+
+    private function getEnderecoViaCEP($cep)
+    {
+        $client = new Client();
+        $response = $client->get("https://viacep.com.br/ws/{$cep}/json/");
+        $endereco = json_decode($response->getBody(), true);
+
+        return $endereco;
+    }
+
+    public function searchByName(Request $request)
+    {
+        // Transforma o nome da busca para minúsculas
+        $nome = strtolower($request->input('nome'));
+
+        // Realiza a busca no banco de dados também com o nome em minúsculas
+        $contatos = $this->contato->whereRaw('LOWER(nome) LIKE ?', ["%{$nome}%"])->get();
+
+        // Retorna a view com os resultados da busca
+        return view('contatos', ['contatos' => $contatos]);
     }
 }
