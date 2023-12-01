@@ -15,3 +15,5 @@ Senha: |
 Código no terminal para iniciar o servidor:
 php artisan serve | 
 npm run dev 
+
+Banco de dados no arquivo raiz do projeto.
